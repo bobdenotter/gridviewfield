@@ -1,14 +1,14 @@
 {
     "name": "bobdenotter/gridfield",
-    "description": "A description about your extension should go here.",
+    "description": "An extension to include Grids with data in your contenttypes.",
     "type": "bolt-extension",
     "require": {
-        "bolt/bolt": ">=2.0.0,<3.0.0"
+        "bolt/bolt": ">=2.2.0,<3.0.0"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "Bob den Otter", 
+            "name": "Bob den Otter",
             "email": "bob@twokings.nl"
         }
     ],
@@ -20,7 +20,7 @@
             "Bolt\\Extension\\BobdenOtter\\GridField\\": ""
         }
     },
-    
+
     "extra": {
         "bolt-assets": "assets"
     }
