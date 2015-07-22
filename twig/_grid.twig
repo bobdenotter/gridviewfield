@@ -13,6 +13,8 @@
     {% set currentvalue = context.content.get(key) %}
 {% endif %}
 
+{% set minimumcolumns = max(field.columns|length, field.minimumcolumns, 5) %}
+
 {#=== FIELDSET ============================================================================#}
 
 <fieldset class="colourpicker">
@@ -34,23 +36,22 @@ jQuery(document).ready(function($) {
         minSpareRows: 1,
         width: '100%',
         height: {{ field.height|default(100) }},
-        minCols: {{ field.columns|length|default(5) }},
+        minCols: {{ minimumcolumns }},
         data: data,
         colHeaders: [ '{{ field.columns|join("', '")|raw }}' ],
         contextMenu: true,
         manualColumnResize: true,
         afterRender: function(changes, source) {
             var data = this.getData();
-            data = data.filter(function(row) { 
+            data = data.filter(function(row) {
                 return !_.isEmpty(_.without(row, null));
             });
             jQuery('#gridfield-{{key}}').val(JSON.stringify(data));
         }
     });
 
-
 });
 </script>
-        <input type="hidden" name="{{key}}" id="gridfield-{{key}}" value="{{ currentvalue }}">
+        <input type="text" name="{{key}}" id="gridfield-{{key}}" value="{{ currentvalue }}">
     </div>
 </fieldset>
