@@ -17,7 +17,6 @@ class Extension extends BaseExtension
         parent::__construct($app);
         $this->app['config']->getFields()->addField(new GridField());
 
-        // For Bolt 2.2
         if ($this->app['config']->getWhichEnd()=='backend') {
             $this->app['htmlsnippets'] = true;
             $this->app['twig.loader.filesystem']->prependPath(__DIR__."/twig");
@@ -36,20 +35,11 @@ class Extension extends BaseExtension
 
     public function addAssets(Request $request)
     {
-        // For Bolt 2.2
         if ($this->app['config']->getWhichEnd()=='backend') {
             $this->addCss('assets/handsontable.full.min.css');
             $this->addJavascript('assets/handsontable.full.min.js', true);
             $this->addJavascript('assets/start.js', true);
         }
-
-        // For Bolt 2.3
-        // if (Zone::isBackend($request)) {
-        //     $request->attributes->set('allow_snippets', true);
-        //     $this->addCss('assets/handsontable.full.min.css');
-        //     $this->addJavascript('assets/handsontable.full.min.js', true);
-        //     $this->addJavascript('assets/start.js', true);
-        // }
 
         $this->app['twig.loader.filesystem']->prependPath(__DIR__."/twig");
 
