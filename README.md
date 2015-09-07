@@ -9,6 +9,9 @@ a contenttype, like this:
 ```
         grid:
             type: grid
+            sorting: true
+            rowheaders: true
+            rowmove: true
             columns:
                 firstname: First name
                 lastname: Last name
