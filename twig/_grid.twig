@@ -2,18 +2,19 @@
 
 {% set attr_opt = {
     class:        field.class|default(''),
-    name_id:      key,
+    name:         name,
+    key:          key,
     required:     field.required|default(false),
     readonly:     field.readonly|default(false)
 }%}
 
-{% if context.content.get(key) is empty or context.content.get(key) is not json %}
+{% if context.content.get(contentkey) is empty or context.content.get(contentkey) is not json %}
     {% set currentvalue = '[[]]' %}
 {% else %}
-    {% set currentvalue = context.content.get(key) %}
+    {% set currentvalue = context.content.get(contentkey) %}
 {% endif %}
 
-{% set minimumcolumns = max(field.columns|length, field.minimumcolumns, 5) %}
+{% set minimumcolumns = max(field.columns|length, field.minimumcolumns, 1) %}
 
 {#=== FIELDSET ============================================================================#}
 
@@ -61,6 +62,6 @@ jQuery(document).ready(function($) {
 
 });
 </script>
-        <input type="hidden" name="{{key}}" id="gridfield-{{key}}" value="{{ currentvalue }}">
+        <input type="hidden" name="{{name}}" id="gridfield-{{key}}" value="{{ currentvalue }}">
     </div>
 </fieldset>
