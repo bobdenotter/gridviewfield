@@ -37,8 +37,8 @@ class Extension extends BaseExtension
     {
         if ($this->app['config']->getWhichEnd()=='backend') {
             $this->addCss('assets/handsontable.full.min.css');
-            $this->addJavascript('assets/handsontable.full.min.js', true);
-            $this->addJavascript('assets/start.js', true);
+            $this->addJavascript('assets/handsontable.full.min.js', array('late' => true));
+            $this->addJavascript('assets/start.js', array('late' => true));
         }
 
         $this->app['twig.loader.filesystem']->prependPath(__DIR__."/twig");
