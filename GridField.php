@@ -24,7 +24,7 @@ class GridField implements FieldInterface
 
     public function getStorageOptions()
     {
-        return array('default' => null);
+        return array('default' => null, 'notnull' => false);
     }
 
 }
