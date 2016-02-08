@@ -2,10 +2,7 @@
 
 namespace Bolt\Extension\BobdenOtter\GridField;
 
-use Bolt\BaseExtension;
-use Symfony\Component\HttpFoundation\Request;
-
-class Extension extends BaseExtension
+class Extension extends \Bolt\BaseExtension
 {
 
     public function getName()
@@ -18,7 +15,7 @@ class Extension extends BaseExtension
         $this->app['config']->getFields()->addField(new GridField());
     }
 
-    public function addAssets(Request $request)
+    public function addAssets()
     {
         if ($this->app['config']->getWhichEnd() === 'backend') {
             $this->app['htmlsnippets'] = true;

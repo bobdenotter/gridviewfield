@@ -2,9 +2,7 @@
 
 namespace Bolt\Extension\BobdenOtter\GridField;
 
-use Bolt\Field\FieldInterface;
-
-class GridField implements FieldInterface
+class GridField implements \Bolt\Field\FieldInterface
 {
 
     public function getName()
