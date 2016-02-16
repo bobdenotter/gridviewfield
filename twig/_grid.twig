@@ -8,7 +8,7 @@
     readonly:     field.readonly|default(false)
 }%}
 
-{% if context.content.get(contentkey) is empty or context.content.get(contentkey) is not json %}
+{% if context.content.get(contentkey) is empty or context.content.get(contentkey) is not json or context.content.get(contentkey) == '[]' %}
     {% set currentvalue = '[[]]' %}
 {% else %}
     {% set currentvalue = context.content.get(contentkey) %}
