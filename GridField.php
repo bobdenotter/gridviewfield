@@ -2,9 +2,7 @@
 
 namespace Bolt\Extension\BobdenOtter\GridField;
 
-use Bolt\Field\FieldInterface;
-
-class GridField implements FieldInterface
+class GridField implements \Bolt\Field\FieldInterface
 {
 
     public function getName()
@@ -24,7 +22,7 @@ class GridField implements FieldInterface
 
     public function getStorageOptions()
     {
-        return array('default' => null);
+        return array('default' => null, 'notnull' => false);
     }
 
 }
