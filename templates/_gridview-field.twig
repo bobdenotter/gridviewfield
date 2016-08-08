@@ -1,0 +1,69 @@
+{#=== Options ============================================================================#}
+
+{% set attr_opt = {
+    class:        field.class|default(''),
+    name:         name,
+    key:          contentkey,
+    required:     field.required|default(false),
+    readonly:     field.readonly|default(false)
+}%}
+
+{% if context.content.get(contentkey) is empty or context.content.get(contentkey) is not json or context.content.get(contentkey) == '[]' %}
+    {% set currentvalue = '[[]]' %}
+{% else %}
+    {% set currentvalue = context.content.get(contentkey) %}
+{% endif %}
+
+{% set minimumcolumns = max(field.columns|length, field.minimumcolumns|default(0), 1) %}
+
+{#=== FIELDSET ============================================================================#}
+
+<fieldset class="colourpicker">
+    <div class="col-sm-12">
+        <div>
+            <label class="control-label">{{field.label|default(contentkey)}}</label>
+        </div>
+        <div id="hot-{{key}}" style='width: 100%; border-right: 1px solid #DDD; border-bottom: 1px solid #DDD; background-color: #F8F8F8;z-index: 1;'></div>
+        <script>
+            jQuery(document).ready(function($) {
+
+                var data = {{ currentvalue|raw }};
+
+                var container = document.getElementById('hot-{{key}}');
+                var hot = new Handsontable(container,
+                {
+                    autoColumnSize: true,
+                    minSpareRows: 1,
+                    width: '100%',
+                    height: {{ field.height|default(100) }},
+                    minCols: {{ minimumcolumns }},
+                    data: data,
+                    colHeaders: [ '{{ field.columns|join("', '")|raw }}' ],
+                    columnSorting: {{field.sorting|default(false) ? 'true' : 'false'}},
+                    sortIndicator: {{field.sorting|default(false) ? 'true' : 'false'}},
+                    rowHeaders: {{field.rowheaders|default(false) ? 'true' : 'false'}},
+                    manualRowMove: {{field.rowmove|default(false) ? 'true' : 'false'}},
+                    contextMenu: true,
+                    manualColumnResize: true,
+                    afterRender: updateData,
+                    afterColumnSort: updateData,
+                    afterRowMove: updateData
+                });
+                function updateData(changes, source) {
+                    if(hot){
+                        var data = this.getData(0, 0, hot.countRows() - 1, hot.countCols() - 1); // Because #989
+                        data = data.filter(function(row) {
+                            var filteredRow = row.filter(function(cell) {
+                                return cell !== null ? cell : false;
+                            });
+                            return filteredRow.length > 0 ? filteredRow : false;
+                        });
+                        jQuery('#gridfield-{{key}}').val(JSON.stringify(data));
+                    }
+                }
+                container.hot = hot;
+            });
+        </script>
+        <input type="hidden" name="{{name}}" id="gridfield-{{key}}" value="{{ currentvalue }}">
+    </div>
+</fieldset>

@@ -1,8 +1,10 @@
 <?php
 
-namespace Bolt\Extension\BobdenOtter\GridField;
+namespace Bolt\Extension\BobdenOtter\GridField\Field;
 
-class GridField implements \Bolt\Field\FieldInterface
+use Bolt\Storage\Field\FieldInterface;
+
+class GridViewField implements FieldInterface
 {
 
     public function getName()
@@ -12,7 +14,7 @@ class GridField implements \Bolt\Field\FieldInterface
 
     public function getTemplate()
     {
-        return '_grid.twig';
+        return '_gridview-field.twig';
     }
 
     public function getStorageType()
@@ -22,7 +24,6 @@ class GridField implements \Bolt\Field\FieldInterface
 
     public function getStorageOptions()
     {
-        return array('default' => null, 'notnull' => false);
+        return ['default' => null, 'notnull' => false];
     }
-
 }

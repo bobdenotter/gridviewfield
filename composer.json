@@ -3,7 +3,7 @@
     "description": "An extension to include Grids with data in your contenttypes.",
     "type": "bolt-extension",
     "require": {
-        "bolt/bolt": ">=2.2.0,<3.0.0"
+        "bolt/bolt": "^3.0.0"
     },
     "license": "MIT",
     "authors": [
@@ -13,15 +13,12 @@
         }
     ],
     "autoload": {
-        "files": [
-            "init.php"
-        ],
         "psr-4": {
-            "Bolt\\Extension\\BobdenOtter\\GridField\\": ""
+            "Bolt\\Extension\\BobdenOtter\\GridField\\": "src"
         }
     },
-
     "extra": {
-        "bolt-assets": "assets"
+        "bolt-class": "Bolt\\Extension\\BobdenOtter\\GridField\\GridFieldExtension",
+        "bolt-assets": "web"
     }
 }
