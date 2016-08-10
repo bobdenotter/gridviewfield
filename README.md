@@ -54,3 +54,8 @@ in the template. USe the following snippet to do so:
         No grid.
     {% endif %}
 ```
+
+This extension uses the [Handsontable][ht] javascript spreadsheet library.
+
+[ht]: https://handsontable.com/
+
