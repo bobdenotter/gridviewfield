@@ -26,4 +26,9 @@ class GridViewField implements FieldInterface
     {
         return ['default' => null, 'notnull' => false];
     }
+
+    public function load()
+    {
+        return;
+    }
 }
