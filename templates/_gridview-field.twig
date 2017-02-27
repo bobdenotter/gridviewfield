@@ -54,10 +54,13 @@
                             afterRowMove: updateData
                         });
                         function updateData(changes, source) {
-                            if(hot){
+                            if (hot) {
                                 var data = this.getData(0, 0, hot.countRows() - 1, hot.countCols() - 1); // Because #989
                                 data = data.filter(function(row) {
-                                    return !_.isEmpty(_.without(row, null));
+                                    var filteredRow = row.filter(function(cell) {
+                                        return cell !== null ? cell : false;
+                                    });
+                                    return filteredRow.length > 0 ? filteredRow : false;
                                 });
                                 jQuery('#gridfield-{{key}}').val(JSON.stringify(data));
                             }
