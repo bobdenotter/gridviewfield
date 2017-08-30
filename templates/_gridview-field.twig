@@ -18,13 +18,13 @@
 
 {#=== FIELDSET ============================================================================#}
 
-<fieldset class="grid">
-    <div class="col-sm-12">
+<fieldset class="grid bolt-field-{{key}}">
+    <div class="col-sm-12" style="padding: 0;">
         <div>
-            <label class="control-label">{{field.label|default(key)}}</label>
+            <label class="main control-label">{{field.label|default(key)}}</label>
         </div>
 
-        <div id="hot-{{key}}" style='width: 100%; border-right: 1px solid #DDD; border-bottom: 1px solid #DDD; background-color: #F8F8F8;z-index: 1;'></div>
+        <div id="hot-{{key}}" style='width: 100%; border-right: 1px solid #DDD; border-bottom: 1px solid #DDD; background-color: #F8F8F8; z-index: 1;'></div>
         <script>
             jQuery(document).ready(function($) {
                 function checkGridInit() {
