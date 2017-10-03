@@ -14,7 +14,7 @@
     {% set currentvalue = context.content.get(contentkey) %}
 {% endif %}
 
-{% set minimumcolumns = max(field.columns|length, field.minimumcolumns, 1) %}
+{% set minimumcolumns = max(field.columns|length, field.minimumcolumns|default(1)) %}
 
 {#=== FIELDSET ============================================================================#}
 
@@ -32,7 +32,7 @@
                         var data = {{ currentvalue|raw }};
 
                         var container = document.getElementById('hot-{{key}}');
-                        var hot = new Handsontable(container,{
+                        var hot = new Handsontable(container, {
                             autoColumnSize: true,
                             minSpareRows: 1,
                             preventOverflow: 'horizontal',
@@ -42,11 +42,11 @@
                             stretchH: 'all',
                             data: data,
                             colHeaders: {{ (field.columns is iterable ? "[ '" ~ field.columns|join("', '")|raw ~ "' ]" : (field.colheaders ? 'true' : 'false'))|raw }},
-                            columnSorting: {{field.sorting ? 'true' : 'false'}},
-                            sortIndicator: {{field.sorting ? 'true' : 'false'}},
-                            rowHeaders: {{field.rowheaders ? 'true' : 'false'}},
-                            manualRowMove: {{field.rowmove ? 'true' : 'false'}},
-                            maxCols: {{field.maximumcols ? field.maximumcols : 1000}},
+                            columnSorting: {{ field.sorting ? 'true' : 'false' }},
+                            sortIndicator: {{ field.sorting ? 'true' : 'false' }},
+                            rowHeaders: {{ field.rowheaders ? 'true' : 'false' }},
+                            manualRowMove: {{field.rowmove ? 'true' : 'false' }},
+                            maxCols: {{ field.maximumcols|default(1000) }},
                             contextMenu: true,
                             manualColumnResize: true,
                             afterRender: updateData,
@@ -66,7 +66,7 @@
                             }
                         }
                         container.hot = hot;
-                    }else{
+                    } else {
                         setTimeout(checkGridInit, 500);
                     }
                 }
