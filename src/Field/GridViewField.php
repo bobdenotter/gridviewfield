@@ -2,11 +2,12 @@
 
 namespace Bolt\Extension\BobdenOtter\GridField\Field;
 
-use Bolt\Storage\Field\FieldInterface;
+use Bolt\Storage\EntityManager;
+use Bolt\Storage\Field\Type\FieldTypeBase;
+use Bolt\Storage\QuerySet;
 
-class GridViewField implements FieldInterface
+class GridViewField extends FieldTypeBase
 {
-
     public function getName()
     {
         return 'grid';
@@ -24,11 +25,9 @@ class GridViewField implements FieldInterface
 
     public function getStorageOptions()
     {
-        return ['default' => null, 'notnull' => false];
-    }
-
-    public function load()
-    {
-        return;
+        return [
+            'default' => null,
+            'notnull' => false
+        ];
     }
 }
